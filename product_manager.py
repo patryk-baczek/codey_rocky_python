@@ -10,6 +10,7 @@ class Product:
         self.name = name
         self.location = location
         self.price = price
+        self.quantity = 1
 
 
 available_products = [Product('milk', 'aisle 2', 3.50), Product('eggs', 'aisle 4', 5.50)]
@@ -25,6 +26,7 @@ def display_products():
     for product in available_products:
         time.sleep(1)
         display(product.name)
+
 
 def add_to_shopping_list():
     global shopping_list, current_displayed_product_index, available_products
@@ -48,7 +50,6 @@ def get_random_product_of_the_day():
     display(random_product_text)
 
 
-@event.button_c_pressed
 def toggle_shopping_mode():
     global shopping_mode
 
@@ -59,7 +60,7 @@ def toggle_shopping_mode():
     else:
         turn_on_shopping_mode()
 
-
+@event.button_c_pressed
 def turn_on_shopping_mode():
     global shopping_mode
     shopping_mode = 1
@@ -69,7 +70,7 @@ def turn_on_shopping_mode():
     for product in shopping_list:
         shopping_costs = shopping_costs + product.price
 
-    display('shopping costs: '+ str(shopping_costs) +' PLN')
+    display('shopping costs: ' + str(shopping_costs) + ' PLN')
 
 
 @event.button_b_pressed
@@ -96,6 +97,7 @@ def remove_from_shopping_list():
     product_count = len(shopping_list)
     if product_count == 0:
         display('all planned products have been purchased')
+
 
 def next_shopping_product():
     global shopping_list, current_displayed_shopping_product_index
@@ -128,6 +130,14 @@ def next_product():
         current_displayed_product_index = next_index
     else:
         current_displayed_product_index = 0
+
+
+
+def increase_quantity():
+    global available_products, current_displayed_product_index
+    selected_product = available_products[current_displayed_product_index]
+    selected_product.quantity = selected_product.quantity + 1
+    display('amount of product increased' + str(selected_product.quantity) + ' ' + selected_product.name)
 
 
 def display(text):

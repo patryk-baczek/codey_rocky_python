@@ -24,6 +24,8 @@ def add_to_final_grades():
 @event.button_b_pressed
 def final_result():
     operation = len(list_grades)
+    if operation == 0:
+        codey.display.show('add grades first')
     sum = 0
     for grades in list_grades:
        sum = sum + grades

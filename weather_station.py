@@ -1,14 +1,12 @@
-import datetime
-import codey, event, time
+import codey, event
 import urequests
-import ujson
 
 hours_of_day = [0, 3, 6, 9, 12, 15, 18, 21]
 
-wifi_name = 'BandwidthTogether'
-wifi_password = 'U3xBpfxhZFsAdJDp'
+wifi_name = 'your wifi'
+wifi_password = 'your password'
 
-api_key = '156a2adfb1e0d934457cd5a010212213'
+api_key = 'your api key'
 lat = 50.041321
 lon = 21.99901
 request_url = 'http://api.openweathermap.org/data/2.5/forecast?lat={}&lon={}&appid={}&units=metric'.format(lat, lon, api_key)
@@ -45,11 +43,7 @@ def get_weather():
     resp = urequests.get(request_url)
     if resp.status_code < 299:
         result = resp.json()
-        today_date = datetime.date.today()
-        year = today_date.year
-        month = today_date.month
-        day = today_date.day
-        weather_date_time = year + '-' + month + '-' + day + ' ' +selected_hours + ':00.00'
+        weather_date_time = 2023 + '-0' + 8 + '-' + 4 + ' ' +selected_hours + ':00.00'
         weather_entry = None
         for entry in result['list']:
             if entry['dt_txt'] == weather_date_time:
